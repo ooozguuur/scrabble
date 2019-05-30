@@ -1,7 +1,8 @@
 package com.gunes.dao.base.impl;
 
 import com.gunes.dao.base.GenericDao;
-import org.apache.log4j.Logger;
+import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import org.jboss.logging.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -13,7 +14,7 @@ import java.lang.reflect.ParameterizedType;
 @Transactional
 public abstract class GenericJpaDao<T, ID extends Serializable> implements GenericDao<T, ID> {
 
-    private static final Logger LOGGER = Logger.getLogger(GenericJpaDao.class);
+    private static final Logger LOGGER = LoggerFactory.logger(GenericJpaDao.class);
 
     private Class<T> persistentClass;
 
@@ -42,9 +43,9 @@ public abstract class GenericJpaDao<T, ID extends Serializable> implements Gener
         try {
             return this.persistentClass.newInstance();
         } catch (final InstantiationException e) {
-            LOGGER.debug("Can not call newInstance() on the Class for {}" + persistentClass.getName(), e);
+            LOGGER.error("Can not call newInstance() on the Class for {}" + persistentClass.getName(), e);
         } catch (final IllegalAccessException e) {
-            LOGGER.debug("Can not created Class for {}" + persistentClass.getName(), e);
+            LOGGER.error("Can not created Class for {}" + persistentClass.getName(), e);
         }
         return null;
     }

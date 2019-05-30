@@ -16,7 +16,7 @@ public class Board extends IdBaseEntity implements Serializable {
 
     @Column(name = "STATUS", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Status status = Status.WAITING;
+    private Status status = Status.ACTIVE;
 
     @Column(name = "HORIZONTAL_SIZE")
     private int horizontalSize = DEFAULT_HORIZONTAL_SIZE;

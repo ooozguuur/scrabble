@@ -4,6 +4,7 @@ import com.gunes.enums.DirectionType;
 import com.gunes.model.entity.base.IdBaseEntity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -11,8 +12,8 @@ import java.util.Set;
 @Table(name = "WORD")
 public class Word extends IdBaseEntity {
 
-    @Column(name = "WORD", nullable = false)
-    private String word;
+    @Column(name = "LETTERS", nullable = false)
+    private String letters;
 
     @Column(name = "HORIZONTAL_STARTING_POINT", nullable = false)
     private int horizontalStartingPoint;
@@ -28,14 +29,14 @@ public class Word extends IdBaseEntity {
     private DirectionType directionType;
 
     @OneToMany(fetch = FetchType.LAZY, targetEntity = Cell.class)
-    private Set<Cell> cells;
+    private Set<Cell> cells = new HashSet<>();
 
-    public String getWord() {
-        return word;
+    public String getLetters() {
+        return letters;
     }
 
-    public void setWord(final String word) {
-        this.word = word;
+    public void setLetters(final String letters) {
+        this.letters = letters;
     }
 
     public int getHorizontalStartingPoint() {
@@ -82,7 +83,7 @@ public class Word extends IdBaseEntity {
     @Override
     public String toString() {
         return "Word{" +
-                "word='" + word + '\'' +
+                "letters='" + letters + '\'' +
                 ", horizontalStartingPoint=" + horizontalStartingPoint +
                 ", verticalStartingPoint=" + verticalStartingPoint +
                 ", score=" + score +
@@ -99,12 +100,12 @@ public class Word extends IdBaseEntity {
         return horizontalStartingPoint == word1.horizontalStartingPoint &&
                 verticalStartingPoint == word1.verticalStartingPoint &&
                 score == word1.score &&
-                Objects.equals(word, word1.word) &&
+                Objects.equals(letters, word1.letters) &&
                 directionType == word1.directionType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(word, horizontalStartingPoint, verticalStartingPoint, score, directionType);
+        return Objects.hash(letters, horizontalStartingPoint, verticalStartingPoint, score, directionType);
     }
 }

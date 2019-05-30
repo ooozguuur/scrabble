@@ -1,30 +1,39 @@
 package com.gunes.controller;
 
+import com.gunes.enums.Status;
 import com.gunes.model.entity.Board;
-import com.gunes.model.vo.Move;
+import com.gunes.model.entity.Move;
 import com.gunes.service.BoardService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.gunes.service.MoveService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/play")
+@RequestMapping(value = "/play", consumes = "application/json", produces = "application/json")
 public class PlayController {
 
-    @Autowired
-    private BoardService boardService;
+    private final BoardService boardService;
 
-    @PostMapping("/boardId")
-    public ResponseEntity<Long> play(@PathVariable Long boardId, List<Move> moves) {
+    private final MoveService moveService;
+
+    public PlayController(final MoveService moveService, final BoardService boardService) {
+        this.moveService = moveService;
+        this.boardService = boardService;
+    }
+
+    @PostMapping("/{boardId}")
+    public ResponseEntity<Long> play(@PathVariable Long boardId, Move move) {
+        if (move == null) {
+            //TODO
+        }
         Board board = boardService.getById(boardId);
         if (board == null) {
-            return ResponseEntity.ok().body(board.getId());
+            //TODO
         }
+        if (board.getStatus().equals(Status.PASSIVE)) {
+            //TODO
+        }
+        moveService.play(board, move);
         return null;
     }
 }

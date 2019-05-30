@@ -3,12 +3,17 @@ package com.gunes.service.impl;
 import com.gunes.dao.BoardDao;
 import com.gunes.model.entity.Board;
 import com.gunes.service.BoardService;
+import com.gunes.service.MoveService;
 import com.gunes.service.base.impl.GenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BoardServiceImpl extends GenericServiceImpl<Board, Long> implements BoardService {
+
+    @Autowired
+    private MoveService moveService;
 
     private BoardDao boardDao;
 
@@ -19,9 +24,12 @@ public class BoardServiceImpl extends GenericServiceImpl<Board, Long> implements
     }
 
     @Override
+    @Transactional
     public Board createBoard() {
         Board board = boardDao.createEntityObject();
-        return boardDao.save(board);
+        board =  boardDao.save(board);
+        moveService.firstMoveByBoard(board);
+        return board;
     }
 
     @Override
