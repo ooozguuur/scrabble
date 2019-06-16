@@ -35,15 +35,15 @@ public class BoardController {
     }
 
     @PutMapping("/update-status/{boardId}")
-    public ResponseEntity<BoardVO> setStatus(@PathVariable Long boardId, @RequestParam String status) {
-        if (!Status.isValidStatus(status)) {
-            LOGGER.error("The 'status' parameter  not acceptable {}", status);
-            throw new IllegalArgumentException("The 'status' parameter  not acceptable ");
-        }
+    public ResponseEntity<BoardVO> updateStatus(@PathVariable Long boardId, @RequestParam String status) {
         Board board = boardService.getById(boardId);
         if (board == null) {
             LOGGER.error("Board not found. {}", boardId);
             throw new BoardNotFoundException("Board not found. Id:{} " + boardId);
+        }
+        if (!Status.isValidStatus(status) || board.getStatus() == Status.PASSIVE) {
+            LOGGER.error("The 'status' parameter  not acceptable {}", status);
+            throw new IllegalArgumentException("The 'status' parameter  not acceptable ");
         }
         board.setStatus(Status.valueOf(status));
         board = boardService.update(board);

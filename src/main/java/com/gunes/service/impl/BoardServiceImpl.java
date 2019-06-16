@@ -35,7 +35,7 @@ public class BoardServiceImpl extends GenericServiceImpl<Board, Long> implements
         board =  boardDao.save(board);
         LOGGER.debug("New Board saved");
         moveService.firstMoveByBoard(board);
-        LOGGER.debug("The board did the first move. {}", board.getId());
+        LOGGER.debug("The board did first move. {}", board.getId());
         return board;
     }
 
