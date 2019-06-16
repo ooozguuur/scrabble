@@ -1,7 +1,5 @@
 package com.gunes.controller;
 
-import com.gunes.enums.Status;
-import com.gunes.exceptions.BoardNotActiveException;
 import com.gunes.exceptions.BoardNotFoundException;
 import com.gunes.model.entity.Board;
 import com.gunes.model.entity.Move;
@@ -10,6 +8,8 @@ import com.gunes.model.vo.mapper.MoveMapper;
 import com.gunes.service.BoardService;
 import com.gunes.service.MoveService;
 import org.mapstruct.factory.Mappers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +24,8 @@ public class MoveController {
 
     private static final MoveMapper mapper = Mappers.getMapper(MoveMapper.class);
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(MoveController.class);
+
     @Autowired
     private BoardService boardService;
 
@@ -37,12 +39,11 @@ public class MoveController {
     public ResponseEntity<MoveVO> getBoardContent(@PathVariable Long boardId, @PathVariable Integer sequence) {
         Board board = boardService.getById(boardId);
         if (board == null) {
+            LOGGER.error("Board not found. {}", boardId);
             throw new BoardNotFoundException("Board not found. Id:{} " + boardId);
         }
-        if (board.getStatus().equals(Status.PASSIVE)) {
-            throw new BoardNotActiveException("Board not active. Id:{} " + boardId);
-        }
         Move move = moveService.getBoardContent(board, sequence);
+        LOGGER.info("Board created {}", board.getId());
         return ResponseEntity.ok().body(mapper.mapToVO(move));
     }
 

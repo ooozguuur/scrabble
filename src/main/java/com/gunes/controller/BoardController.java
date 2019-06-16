@@ -3,7 +3,10 @@ package com.gunes.controller;
 import com.gunes.enums.Status;
 import com.gunes.exceptions.BoardNotFoundException;
 import com.gunes.model.entity.Board;
+import com.gunes.model.vo.BoardVO;
+import com.gunes.model.vo.mapper.BoardMapper;
 import com.gunes.service.BoardService;
+import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 public class BoardController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BoardController.class);
+
+    private static final BoardMapper mapper = Mappers.getMapper(BoardMapper.class);
 
     private final BoardService boardService;
 
@@ -30,7 +35,7 @@ public class BoardController {
     }
 
     @PutMapping("/update-status/{boardId}")
-    public ResponseEntity<Board> setStatus(@PathVariable Long boardId, @RequestParam String status) {
+    public ResponseEntity<BoardVO> setStatus(@PathVariable Long boardId, @RequestParam String status) {
         if (!Status.isValidStatus(status)) {
             LOGGER.error("The 'status' parameter  not acceptable {}", status);
             throw new IllegalArgumentException("The 'status' parameter  not acceptable ");
@@ -43,6 +48,6 @@ public class BoardController {
         board.setStatus(Status.valueOf(status));
         board = boardService.update(board);
         LOGGER.info("Board updated status. Id:{}", board.getId());
-        return ResponseEntity.ok().body(board);
+        return ResponseEntity.ok().body(mapper.mapToVO(board));
     }
 }
