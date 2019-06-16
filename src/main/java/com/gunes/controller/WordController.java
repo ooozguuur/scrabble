@@ -40,7 +40,7 @@ public class WordController {
 
     @GetMapping("get-words/{boardId}")
     public ResponseEntity<List<WordVO>> getWords(@PathVariable Long boardId) {
-        Board board = boardService.getById(boardId);
+        Board board = boardService.findById(boardId);
         if (board == null) {
             throw new BoardNotFoundException("Board not found. Id:{} " + boardId);
         }

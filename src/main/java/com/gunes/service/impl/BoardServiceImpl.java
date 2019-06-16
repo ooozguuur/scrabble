@@ -30,23 +30,13 @@ public class BoardServiceImpl extends GenericServiceImpl<Board, Long> implements
     @Override
     @Transactional
     public Board createBoard() {
-        Board board = boardDao.createEntityObject();
+        Board board = this.createEntityObject();
         LOGGER.debug("Created board object");
-        board =  boardDao.save(board);
+        board =  this.persist(board);
         LOGGER.debug("New Board saved");
         moveService.firstMoveByBoard(board);
         LOGGER.debug("The board did first move. {}", board.getId());
         return board;
-    }
-
-    @Override
-    public Board getById(final Long boardId) {
-        return boardDao.findById(boardId);
-    }
-
-    @Override
-    public Board update(final Board board) {
-        return boardDao.update(board);
     }
 
 }

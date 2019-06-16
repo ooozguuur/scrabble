@@ -108,7 +108,7 @@ public class WordServiceImpl extends GenericServiceImpl<Word, Long> implements W
         }
         word.setCells(letterSet);
         words.add(word);
-        wordDao.save(word);
+        wordDao.persist(word);
         return words;
     }
 

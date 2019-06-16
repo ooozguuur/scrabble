@@ -36,7 +36,7 @@ public class BoardController {
 
     @PutMapping("/update-status/{boardId}")
     public ResponseEntity<BoardVO> updateStatus(@PathVariable Long boardId, @RequestParam String status) {
-        Board board = boardService.getById(boardId);
+        Board board = boardService.findById(boardId);
         if (board == null) {
             LOGGER.error("Board not found. {}", boardId);
             throw new BoardNotFoundException("Board not found. Id:{} " + boardId);

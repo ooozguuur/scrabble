@@ -3,7 +3,7 @@ package com.gunes.controller;
 import com.gunes.exceptions.BoardNotFoundException;
 import com.gunes.model.entity.Board;
 import com.gunes.model.entity.Move;
-import com.gunes.model.vo.MoveVO;
+import com.gunes.model.vo.CellVO;
 import com.gunes.model.vo.mapper.MoveMapper;
 import com.gunes.service.BoardService;
 import com.gunes.service.MoveService;
@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 @RestController
@@ -36,15 +38,14 @@ public class MoveController {
     }
 
     @GetMapping("get-board-content/{boardId}/{sequence}")
-    public ResponseEntity<MoveVO> getBoardContent(@PathVariable Long boardId, @PathVariable Integer sequence) {
-        Board board = boardService.getById(boardId);
+    public ResponseEntity<List<CellVO>> getBoardContent(@PathVariable Long boardId, @PathVariable Integer sequence) {
+        Board board = boardService.findById(boardId);
         if (board == null) {
             LOGGER.error("Board not found. {}", boardId);
             throw new BoardNotFoundException("Board not found. Id:{} " + boardId);
         }
-        Move move = moveService.getBoardContent(board, sequence);
-        LOGGER.info("Board created {}", board.getId());
-        return ResponseEntity.ok().body(mapper.mapToVO(move));
+        List<Move> moves = moveService.getBoardContent(board, sequence);
+        return ResponseEntity.ok().body(null);
     }
 
 }

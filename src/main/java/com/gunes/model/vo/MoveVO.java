@@ -1,7 +1,5 @@
 package com.gunes.model.vo;
 
-import com.gunes.model.entity.Word;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +7,7 @@ public class MoveVO extends IdBaseVO {
 
     private int sequence;
 
-    private List<Word> words = new ArrayList<>();
+    private List<WordVO> words = new ArrayList<>();
 
     public int getSequence() {
         return sequence;
@@ -19,11 +17,11 @@ public class MoveVO extends IdBaseVO {
         this.sequence = sequence;
     }
 
-    public List<Word> getWords() {
+    public List<WordVO> getWords() {
         return words;
     }
 
-    public void setWords(final List<Word> words) {
+    public void setWords(final List<WordVO> words) {
         this.words = words;
     }
 }

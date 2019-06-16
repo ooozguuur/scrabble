@@ -8,7 +8,7 @@ public interface GenericDao<T, ID extends Serializable> {
 
     T createEntityObject();
 
-    T save(T entity);
+    T persist(T entity);
 
     T update(T entity);
 

@@ -2,6 +2,9 @@ package com.gunes.model.vo;
 
 import com.gunes.enums.DirectionType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WordVO extends IdBaseVO {
 
     private String letters;
@@ -14,6 +17,7 @@ public class WordVO extends IdBaseVO {
 
     private DirectionType directionType;
 
+    private List<CellVO> cells = new ArrayList<>();
 
     public String getLetters() {
         return letters;
@@ -53,5 +57,13 @@ public class WordVO extends IdBaseVO {
 
     public void setDirectionType(final DirectionType directionType) {
         this.directionType = directionType;
+    }
+
+    public List<CellVO> getCells() {
+        return cells;
+    }
+
+    public void setCells(final List<CellVO> cells) {
+        this.cells = cells;
     }
 }

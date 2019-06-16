@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class MoveServiceImpl extends GenericServiceImpl<Move, Long> implements MoveService {
 
@@ -30,7 +32,7 @@ public class MoveServiceImpl extends GenericServiceImpl<Move, Long> implements M
         move.setSequence(++sequence);
         move.setBoard(board);
         move.getWords().stream().map(word -> wordService.createWordsByBoard(board, word)).forEach(words -> move.getWords().addAll(words));
-        moveDao.save(move);
+        moveDao.persist(move);
     }
 
     private Integer getLastSequenceByBoardId(Long boardId) {
@@ -41,12 +43,12 @@ public class MoveServiceImpl extends GenericServiceImpl<Move, Long> implements M
     public void firstMoveByBoard(final Board board) {
         Move move = this.createEntityObject();
         move.setBoard(board);
-        moveDao.save(move);
+        moveDao.persist(move);
     }
 
 
     @Override
-    public Move getBoardContent(final Board board, final Integer sequence) {
+    public List<Move> getBoardContent(final Board board, final Integer sequence) {
         return moveDao.getBoardContent(board.getId(), sequence);
     }
 }

@@ -7,7 +7,4 @@ public interface BoardService extends GenericService<Board, Long> {
 
     Board createBoard();
 
-    Board getById(Long boardId);
-
-    Board update(Board board);
 }

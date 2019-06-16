@@ -8,4 +8,11 @@ public interface GenericService<T, ID extends Serializable> {
 
     T createEntityObject();
 
+    T persist(T entity);
+
+    T update(T entity);
+
+    T findById(long id);
+
+
 }

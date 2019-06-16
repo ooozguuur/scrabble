@@ -5,6 +5,8 @@ import com.gunes.dao.base.impl.GenericJpaDao;
 import com.gunes.model.entity.Move;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public class MoveDaoImpl extends GenericJpaDao<Move, Long> implements MoveDao {
@@ -26,11 +28,11 @@ public class MoveDaoImpl extends GenericJpaDao<Move, Long> implements MoveDao {
     }
 
     @Override
-    public Move getBoardContent(final Long boardId, final Integer sequence) {
-        String sql = " select mo from Move mo where mo.board.id = :boardId and mo.sequence =:sequence ";
+    public List<Move> getBoardContent(final Long boardId, final Integer sequence) {
+        String sql = " select mo from Move mo where mo.board.id = :boardId and mo.sequence <= :sequence ";
         return getEntityManager().createQuery(sql, Move.class)
                 .setParameter("boardId", boardId)
                 .setParameter("sequence", sequence)
-                .getSingleResult();
+                .getResultList();
     }
 }
