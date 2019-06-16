@@ -5,6 +5,7 @@ import com.gunes.model.entity.Move;
 
 public interface MoveDao extends GenericDao<Move, Long> {
 
-    int getLastMoveSequenceByBoardId(long boardId);
+    Integer getLastSequenceByBoardId(Long boardId);
 
+    Move getBoardContent(Long boardId, Integer sequnce);
 }

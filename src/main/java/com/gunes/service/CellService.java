@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface CellService extends GenericService<Cell, Long> {
 
-    boolean hasCellByBoard(long boardId);
+    Long countLetterByBoardId(final Long boardId);
 
     List<Cell> splitTheWord(Word word);
+
+    List<Cell> getByBoardId(Long id);
 }

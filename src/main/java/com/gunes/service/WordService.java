@@ -29,4 +29,6 @@ public interface WordService extends GenericService<Word, Long> {
         }
         return true;
     }
+
+    List<Word> getWords(Long boardId);
 }

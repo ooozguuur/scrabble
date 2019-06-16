@@ -5,6 +5,8 @@ import com.gunes.dao.base.impl.GenericJpaDao;
 import com.gunes.model.entity.Cell;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public class CellDaoImpl extends GenericJpaDao<Cell, Long> implements CellDao {
@@ -20,8 +22,14 @@ public class CellDaoImpl extends GenericJpaDao<Cell, Long> implements CellDao {
     }
 
     @Override
-    public boolean hasCellByBoard(final long boardId) {
-        String sql = "SELECT COUNT(ce) > 0 from Cell ce where ce.board.id = :boardId";
-        return (boolean) getEntityManager().createQuery(sql).getSingleResult();
+    public Long countLetterByBoardId(final Long boardId) {
+        String sql = "SELECT COUNT(ce) from Cell ce where ce.board.id = :boardId";
+        return (Long) getEntityManager().createQuery(sql).setParameter("boardId", boardId).getSingleResult();
+    }
+
+    @Override
+    public List<Cell> getByBoardId(final Long boardId) {
+        String sql = "SELECT ce from Cell ce where ce.board.id = :boardId";
+        return (List<Cell>) getEntityManager().createQuery(sql).setParameter("boardId", boardId).getResultList();
     }
 }

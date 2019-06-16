@@ -29,31 +29,30 @@ public class MoveServiceImpl extends GenericServiceImpl<Move, Long> implements M
 
     @Transactional(rollbackFor = Exception.class)
     public void play(final Board board, final Move move) {
-        int sequence = this.getLastMoveSequenceByBoardId(board.getId());
+        Integer sequence = this.getLastSequenceByBoardId(board.getId());
         move.setSequence(++sequence);
         move.setBoard(board);
-        for (Word wordVO : move.getWords()) {
-            List<Word> words = wordService.createWordsByBoard(board, wordVO);
+        for (Word word : move.getWords()) {
+            List<Word> words = wordService.createWordsByBoard(board, word);
             move.getWords().addAll(words);
         }
-        this.save(move);
+        moveDao.save(move);
     }
 
-    private int getLastMoveSequenceByBoardId(long boardId) {
-        return moveDao.getLastMoveSequenceByBoardId(boardId);
-    }
-
-    @Override
-    public Move save(final Move move) {
-        return moveDao.save(move);
+    private Integer getLastSequenceByBoardId(Long boardId) {
+        return moveDao.getLastSequenceByBoardId(boardId);
     }
 
     @Override
     public void firstMoveByBoard(final Board board) {
         Move move = this.createEntityObject();
         move.setBoard(board);
-        this.save(move);
+        moveDao.save(move);
     }
 
 
+    @Override
+    public Move getBoardContent(final Board board, final Integer sequnce) {
+        return moveDao.getBoardContent(board.getId(), sequnce);
+    }
 }

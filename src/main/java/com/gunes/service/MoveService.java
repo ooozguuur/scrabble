@@ -8,7 +8,7 @@ public interface MoveService extends GenericService<Move, Long> {
 
     void play(Board board, Move moves);
 
-    Move save(Move move);
-
     void firstMoveByBoard(Board board);
+
+    Move getBoardContent(Board board, Integer sequnce);
 }

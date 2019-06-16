@@ -14,5 +14,4 @@ public interface GenericDao<T, ID extends Serializable> {
 
     T findById(long id);
 
-
 }

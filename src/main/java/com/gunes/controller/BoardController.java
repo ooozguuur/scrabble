@@ -1,9 +1,11 @@
 package com.gunes.controller;
 
 import com.gunes.enums.Status;
+import com.gunes.exceptions.BoardNotFoundException;
 import com.gunes.model.entity.Board;
 import com.gunes.service.BoardService;
-import org.springframework.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/board", consumes = "application/json", produces = "application/json")
 public class BoardController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(BoardController.class);
 
     private final BoardService boardService;
 
@@ -21,25 +25,24 @@ public class BoardController {
     @PostMapping("/create")
     public ResponseEntity<Long> createBoard() {
         Board board = boardService.createBoard();
-        if (board != null) {
-            return ResponseEntity.ok().body(board.getId());
-        }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        LOGGER.info("Board created {}", board.getId());
+        return ResponseEntity.ok().body(board.getId());
     }
 
     @PutMapping("/update-status/{boardId}")
     public ResponseEntity<Board> setStatus(@PathVariable Long boardId, @RequestParam String status) {
-        if (status == null) {
-            //TODO
+        if (!Status.isValidStatus(status)) {
+            LOGGER.error("The 'status' parameter  not acceptable {}", status);
+            throw new IllegalArgumentException("The 'status' parameter  not acceptable ");
         }
         Board board = boardService.getById(boardId);
         if (board == null) {
-            //TODO
+            LOGGER.error("Board not found. {}", boardId);
+            throw new BoardNotFoundException("Board not found. Id:{} " + boardId);
         }
         board.setStatus(Status.valueOf(status));
-        //TODO
         board = boardService.update(board);
+        LOGGER.info("Board updated status. Id:{}", board.getId());
         return ResponseEntity.ok().body(board);
     }
-
 }

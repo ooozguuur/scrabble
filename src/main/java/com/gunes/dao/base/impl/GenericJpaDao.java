@@ -58,14 +58,12 @@ public abstract class GenericJpaDao<T, ID extends Serializable> implements Gener
     }
 
     @Override
-    @Transactional
     public T save(final T entity) {
         getEntityManager().persist(entity);
         return entity;
     }
 
     @Override
-    @Transactional
     public T update(final T entity) {
         T mergedEntity = getEntityManager().merge(entity);
         return mergedEntity;

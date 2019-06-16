@@ -7,14 +7,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "MOVE", indexes = {@Index(name = "MOVE_BOARD_ID", columnList = "BOARD_ID")},
+@Table(name = "MOVE", indexes = {@Index(name = "MOVE_BOARD_ID_INDEX", columnList = "BOARD_ID")},
        uniqueConstraints = {@UniqueConstraint(columnNames = {"SEQ", "BOARD_ID"})})
 public class Move extends IdBaseEntity {
 
     @Column(name = "SEQ")
     private int sequence;
 
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = Word.class)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "move", targetEntity = Word.class)
     private Set<Word> words = new HashSet<>();
 
     @ManyToOne

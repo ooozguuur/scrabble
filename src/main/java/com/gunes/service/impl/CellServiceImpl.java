@@ -24,8 +24,8 @@ public class CellServiceImpl extends GenericServiceImpl<Cell, Long> implements C
     }
 
     @Override
-    public boolean hasCellByBoard(final long boardId) {
-        return cellDao.hasCellByBoard(boardId);
+    public Long countLetterByBoardId(final Long boardId) {
+        return cellDao.countLetterByBoardId(boardId);
     }
 
     @Override
@@ -37,13 +37,19 @@ public class CellServiceImpl extends GenericServiceImpl<Cell, Long> implements C
             Cell cell = this.createEntityObject();
             cell.setCharacter(c);
             if (word.getDirectionType() == DirectionType.HORIZONTAL) {
+                cell.setxPosition(word.getHorizontalStartingPoint());
+                cell.setyPosition(word.getVerticalStartingPoint() + i);
+            } else {
                 cell.setxPosition(word.getHorizontalStartingPoint() + i);
                 cell.setyPosition(word.getVerticalStartingPoint());
-            } else {
-                cell.setyPosition(word.getVerticalStartingPoint() + i);
-                cell.setxPosition(word.getHorizontalStartingPoint());
             }
+            cells.add(cell);
         }
         return cells;
+    }
+
+    @Override
+    public List<Cell> getByBoardId(final Long boardId) {
+        return cellDao.getByBoardId(boardId);
     }
 }

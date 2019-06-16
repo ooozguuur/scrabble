@@ -28,8 +28,12 @@ public class Word extends IdBaseEntity {
     @Column(name = "DIRECTION_TYPE", nullable = false)
     private DirectionType directionType;
 
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = Cell.class)
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST}, targetEntity = Cell.class)
     private Set<Cell> cells = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "MOVE_ID", nullable = false)
+    private Move move;
 
     public String getLetters() {
         return letters;
@@ -80,6 +84,14 @@ public class Word extends IdBaseEntity {
         this.score = score;
     }
 
+    public Move getMove() {
+        return move;
+    }
+
+    public void setMove(final Move move) {
+        this.move = move;
+    }
+
     @Override
     public String toString() {
         return "Word{" +
@@ -96,16 +108,16 @@ public class Word extends IdBaseEntity {
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        final Word word1 = (Word) o;
-        return horizontalStartingPoint == word1.horizontalStartingPoint &&
-                verticalStartingPoint == word1.verticalStartingPoint &&
-                score == word1.score &&
-                Objects.equals(letters, word1.letters) &&
-                directionType == word1.directionType;
+        final Word word = (Word) o;
+        return horizontalStartingPoint == word.horizontalStartingPoint &&
+                verticalStartingPoint == word.verticalStartingPoint &&
+                score == word.score &&
+                Objects.equals(letters, word.letters) &&
+                directionType == word.directionType &&
+                Objects.equals(move, word.move);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(letters, horizontalStartingPoint, verticalStartingPoint, score, directionType);
+    @Override public int hashCode() {
+        return Objects.hash(letters, horizontalStartingPoint, verticalStartingPoint, score, directionType, move);
     }
 }

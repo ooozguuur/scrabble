@@ -20,7 +20,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource(value = {"classpath:application.properties"})
+@PropertySource(value = {"classpath:/${env}/database.properties"})
 @ComponentScan(basePackages = {"com.gunes.service", "com.gunes.dao"})
 public class JPAConfiguration {
 

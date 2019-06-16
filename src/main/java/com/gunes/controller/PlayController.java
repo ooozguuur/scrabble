@@ -22,7 +22,7 @@ public class PlayController {
     }
 
     @PostMapping("/{boardId}")
-    public ResponseEntity<Long> play(@PathVariable Long boardId, Move move) {
+    public ResponseEntity<Long> play(@PathVariable Long boardId, @RequestBody Move move) {
         if (move == null) {
             //TODO
         }

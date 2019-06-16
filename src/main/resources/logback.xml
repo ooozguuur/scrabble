@@ -7,13 +7,15 @@
         </encoder>
     </appender>
 
-    <logger name="org.springframework" level="WARN" />
-    <logger name="org.springframework.transaction" level="WARN" />
-
-    <!-- in order to debug some marshalling issues, this needs to be TRACE -->
-    <logger name="org.springframework.web.servlet.mvc" level="WARN" />
+    <logger name="org.springframework" level="ERROR" />
+    <logger name="org.springframework.transaction" level="ERROR" />
+    <logger name="org.springframework.web.servlet.mvc" level="ERROR" />
+    <logger name="org.hibernate.type" level="ERROR" />
+    <logger name="org.hibernate" level="ERROR" />
 
     <root level="INFO">
+        <appender-ref ref="FILE" />
         <appender-ref ref="STDOUT" />
     </root>
+
 </configuration>
