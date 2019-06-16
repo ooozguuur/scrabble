@@ -6,4 +6,6 @@ import com.gunes.service.base.GenericService;
 public interface DictionaryWordService extends GenericService<DictionaryWord, Long> {
 
     Long count();
+
+    boolean isAcceptableWord(String letters);
 }

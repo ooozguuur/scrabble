@@ -2,9 +2,10 @@ package com.gunes.controller;
 
 import com.gunes.exceptions.BoardNotFoundException;
 import com.gunes.model.entity.Board;
+import com.gunes.model.entity.Cell;
 import com.gunes.model.entity.Move;
 import com.gunes.model.vo.CellVO;
-import com.gunes.model.vo.mapper.MoveMapper;
+import com.gunes.model.vo.mapper.CellMapper;
 import com.gunes.service.BoardService;
 import com.gunes.service.MoveService;
 import org.mapstruct.factory.Mappers;
@@ -17,14 +18,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @RestController
 @RequestMapping(value = "/move", consumes = "application/json", produces = "application/json")
 public class MoveController {
 
-    private static final MoveMapper mapper = Mappers.getMapper(MoveMapper.class);
+    private static final CellMapper mapper = Mappers.getMapper(CellMapper.class);
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MoveController.class);
 
@@ -45,7 +49,10 @@ public class MoveController {
             throw new BoardNotFoundException("Board not found. Id:{} " + boardId);
         }
         List<Move> moves = moveService.getBoardContent(board, sequence);
-        return ResponseEntity.ok().body(null);
+        Set<Cell> cells = new HashSet<>();
+        moves.forEach(move -> move.getWords().forEach(word -> cells.addAll(word.getCells())));
+        List<CellVO> cellVOS = cells.stream().map(mapper::mapToVO).collect(Collectors.toList());
+        return ResponseEntity.ok().body(cellVOS);
     }
 
 }

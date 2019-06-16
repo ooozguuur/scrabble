@@ -24,4 +24,10 @@ public class DictionaryWordDaoImpl extends GenericJpaDao<DictionaryWord, Long> i
         String sql = "SELECT count(dw) from DictionaryWord dw";
         return getEntityManager().createQuery(sql, Long.class).getSingleResult();
     }
+
+    @Override
+    public boolean isAcceptableWord(final String letters) {
+        String sql = "select count(dw) > 0 from DictionaryWord dw where dw.word = :letters ";
+        return getEntityManager().createQuery(sql, Boolean.class).getSingleResult();
+    }
 }

@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 @Service
@@ -30,8 +32,8 @@ public class CellServiceImpl extends GenericServiceImpl<Cell, Long> implements C
     }
 
     @Override
-    public List<Cell> splitTheWord(final Word word) {
-        List<Cell> cells = new ArrayList<>(word.getLetters().length());
+    public Set<Cell> splitTheWord(final Word word) {
+        Set<Cell> cells = new HashSet<>(word.getLetters().length());
         char[] chars = word.getLetters().toCharArray();
         IntStream.range(0, chars.length).forEach(i -> {
             final char c = chars[i];
@@ -52,5 +54,12 @@ public class CellServiceImpl extends GenericServiceImpl<Cell, Long> implements C
     @Override
     public List<Cell> getByBoardId(final Long boardId) {
         return cellDao.getByBoardId(boardId);
+    }
+
+    @Override
+    public String cellToString(final List<Cell> cells) {
+        StringBuilder stringBuilder = new StringBuilder();
+        cells.forEach(cell -> stringBuilder.append(cell.getCharacter()));
+        return stringBuilder.toString();
     }
 }

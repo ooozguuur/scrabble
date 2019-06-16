@@ -22,4 +22,11 @@ public class DictionaryWordServiceImpl extends GenericServiceImpl<DictionaryWord
     public Long count() {
         return dictionaryWordDao.count();
     }
+
+    @Override
+    public boolean isAcceptableWord(final String letters) {
+        return dictionaryWordDao.isAcceptableWord(letters.toLowerCase());
+    }
+
+
 }
