@@ -24,12 +24,12 @@ public class CellDaoImpl extends GenericJpaDao<Cell, Long> implements CellDao {
     @Override
     public Long countLetterByBoardId(final Long boardId) {
         String sql = "SELECT COUNT(ce) from Cell ce where ce.board.id = :boardId";
-        return (Long) getEntityManager().createQuery(sql).setParameter("boardId", boardId).getSingleResult();
+        return getEntityManager().createQuery(sql, Long.class).setParameter("boardId", boardId).getSingleResult();
     }
 
     @Override
     public List<Cell> getByBoardId(final Long boardId) {
         String sql = "SELECT ce from Cell ce where ce.board.id = :boardId";
-        return (List<Cell>) getEntityManager().createQuery(sql).setParameter("boardId", boardId).getResultList();
+        return getEntityManager().createQuery(sql, Cell.class).setParameter("boardId", boardId).getResultList();
     }
 }

@@ -23,9 +23,7 @@ public class WordDaoImpl extends GenericJpaDao<Word, Long> implements WordDao {
 
     @Override
     public List<Word> getWords(final Long boardId) {
-       String sql = " SELECT wo FROM Word wo join wo.move mo join mo.board bo WHERE bo.id = :boardId ";
-        return getEntityManager().createQuery(sql)
-                .setParameter("boardId", boardId)
-                .getResultList();
+        String sql = " SELECT wo FROM Word wo join wo.move mo join mo.board bo WHERE bo.id = :boardId ";
+        return getEntityManager().createQuery(sql, Word.class).setParameter("boardId", boardId).getResultList();
     }
 }

@@ -32,7 +32,7 @@ public class PlayController {
     }
 
     @PostMapping("/{boardId}")
-    public ResponseEntity<Long> play(@PathVariable Long boardId, @RequestBody MoveVO moveVO) {
+    public ResponseEntity<MoveVO> play(@PathVariable Long boardId, @RequestBody MoveVO moveVO) {
         Board board = boardService.getById(boardId);
         if (board == null) {
             LOGGER.error("Board not found. {}", boardId);

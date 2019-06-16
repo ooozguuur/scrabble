@@ -12,11 +12,11 @@ public interface WordService extends GenericService<Word, Long> {
     List<Word> createWordsByBoard(Board board, Word word);
 
     default boolean isAvailableCoordinates(int horizontalSize, int verticalSize, Word word) {
-        if (word.getHorizontalStartingPoint() < 1 || word.getHorizontalStartingPoint() > horizontalSize) {
+        if (word.getHorizontalStartingPoint() < 0 || word.getHorizontalStartingPoint() > horizontalSize) {
             return false;
         }
 
-        if (word.getVerticalStartingPoint() < 1 || word.getVerticalStartingPoint() > verticalSize) {
+        if (word.getVerticalStartingPoint() < 0 || word.getVerticalStartingPoint() > verticalSize) {
             return false;
         }
 

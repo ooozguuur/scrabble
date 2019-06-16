@@ -10,5 +10,5 @@ public interface MoveService extends GenericService<Move, Long> {
 
     void firstMoveByBoard(Board board);
 
-    Move getBoardContent(Board board, Integer sequnce);
+    Move getBoardContent(Board board, Integer sequence);
 }

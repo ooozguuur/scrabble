@@ -7,5 +7,5 @@ public interface MoveDao extends GenericDao<Move, Long> {
 
     Integer getLastSequenceByBoardId(Long boardId);
 
-    Move getBoardContent(Long boardId, Integer sequnce);
+    Move getBoardContent(Long boardId, Integer sequence);
 }

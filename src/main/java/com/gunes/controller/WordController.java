@@ -38,7 +38,6 @@ public class WordController {
         this.wordService = wordService;
     }
 
-
     @GetMapping("get-words/{boardId}")
     public ResponseEntity<List<WordVO>> getWords(@PathVariable Long boardId) {
         Board board = boardService.getById(boardId);

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @Service
 public class CellServiceImpl extends GenericServiceImpl<Cell, Long> implements CellService {
@@ -32,7 +33,7 @@ public class CellServiceImpl extends GenericServiceImpl<Cell, Long> implements C
     public List<Cell> splitTheWord(final Word word) {
         List<Cell> cells = new ArrayList<>(word.getLetters().length());
         char[] chars = word.getLetters().toCharArray();
-        for (int i = 0; i < chars.length; i++) {
+        IntStream.range(0, chars.length).forEach(i -> {
             final char c = chars[i];
             Cell cell = this.createEntityObject();
             cell.setCharacter(c);
@@ -44,7 +45,7 @@ public class CellServiceImpl extends GenericServiceImpl<Cell, Long> implements C
                 cell.setyPosition(word.getVerticalStartingPoint());
             }
             cells.add(cell);
-        }
+        });
         return cells;
     }
 

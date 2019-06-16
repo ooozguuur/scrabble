@@ -5,8 +5,6 @@ import com.gunes.dao.base.impl.GenericJpaDao;
 import com.gunes.model.entity.Move;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 
 @Repository
 public class MoveDaoImpl extends GenericJpaDao<Move, Long> implements MoveDao {
@@ -23,16 +21,16 @@ public class MoveDaoImpl extends GenericJpaDao<Move, Long> implements MoveDao {
 
     @Override
     public Integer getLastSequenceByBoardId(final Long boardId) {
-        return (Integer) getEntityManager().createQuery("select max(m.sequence) from Move m where m.board.id = :boardId ")
-                .setParameter("boardId", boardId)
-                .getSingleResult();
+        String sql = " select max(m.sequence) from Move m where m.board.id = :boardId ";
+        return getEntityManager().createQuery(sql, Integer.class).setParameter("boardId", boardId).getSingleResult();
     }
 
     @Override
-    public Move getBoardContent(final Long boardId, final Integer sequnce) {
-        return (Move) getEntityManager().createQuery("select mo from Move mo where mo.board.id = :boardId and mo.sequence =:sequnce")
+    public Move getBoardContent(final Long boardId, final Integer sequence) {
+        String sql = " select mo from Move mo where mo.board.id = :boardId and mo.sequence =:sequence ";
+        return getEntityManager().createQuery(sql, Move.class)
                 .setParameter("boardId", boardId)
-                .setParameter("sequnce", sequnce)
+                .setParameter("sequence", sequence)
                 .getSingleResult();
     }
 }
