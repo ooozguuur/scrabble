@@ -10,7 +10,6 @@ import com.gunes.service.WordService;
 import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,13 +25,13 @@ public class WordController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WordController.class);
 
-    @Autowired
-    private BoardService boardService;
+    private final BoardService boardService;
 
     private final WordService wordService;
 
-    public WordController(final WordService wordService) {
+    public WordController(final WordService wordService, final BoardService boardService) {
         this.wordService = wordService;
+        this.boardService = boardService;
     }
 
     @GetMapping("/get-words/{boardId}")

@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface MoveService extends GenericService<Move, Long> {
 
-    Move play(Board board, Move moves);
+    Move play(Board board, Move move);
 
-    void firstMoveByBoard(Board board);
+    Move firstMoveByBoard(Board board);
 
     List<Move> getBoardContent(Board board, Integer sequence);
 }

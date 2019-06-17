@@ -3,10 +3,10 @@ package com.gunes.exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
-public class BoardNotActiveException extends RuntimeException {
+@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+public class BoardNotUpdateException extends RuntimeException {
 
-    public BoardNotActiveException(String exception) {
+    public BoardNotUpdateException(String exception) {
         super(exception);
     }
 

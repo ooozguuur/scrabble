@@ -29,13 +29,13 @@ public class MoveController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MoveController.class);
 
-    @Autowired
-    private BoardService boardService;
+    private final BoardService boardService;
 
     private final MoveService moveService;
 
-    public MoveController(final MoveService moveService) {
+    public MoveController(final MoveService moveService, final BoardService boardService) {
         this.moveService = moveService;
+        this.boardService = boardService;
     }
 
     @GetMapping("/get-board-content/{boardId}/{sequence}")

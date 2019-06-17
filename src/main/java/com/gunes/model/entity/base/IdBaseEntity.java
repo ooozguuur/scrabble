@@ -22,4 +22,8 @@ public abstract class IdBaseEntity implements Serializable {
     public Long getVersion() {
         return version;
     }
+
+    public void setId(final Long id) {
+        this.id = id;
+    }
 }

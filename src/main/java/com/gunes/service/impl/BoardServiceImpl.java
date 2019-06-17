@@ -16,23 +16,23 @@ public class BoardServiceImpl extends GenericServiceImpl<Board, Long> implements
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BoardServiceImpl.class);
 
-    @Autowired
-    private MoveService moveService;
+    private final MoveService moveService;
 
     private BoardDao boardDao;
 
     @Autowired
-    public BoardServiceImpl(final BoardDao boardDao) {
+    public BoardServiceImpl(final BoardDao boardDao, final MoveService moveService) {
         super(boardDao);
         this.boardDao = boardDao;
+        this.moveService = moveService;
     }
 
     @Override
     @Transactional
     public Board createBoard() {
-        Board board = this.createEntityObject();
+        Board board = boardDao.createEntityObject();
         LOGGER.debug("Created board object");
-        board =  this.persist(board);
+        board = boardDao.persist(board);
         LOGGER.debug("New Board saved");
         moveService.firstMoveByBoard(board);
         LOGGER.debug("The board did first move. {}", board.getId());

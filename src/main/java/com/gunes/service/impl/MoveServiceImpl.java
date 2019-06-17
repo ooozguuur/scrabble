@@ -40,10 +40,10 @@ public class MoveServiceImpl extends GenericServiceImpl<Move, Long> implements M
     }
 
     @Override
-    public void firstMoveByBoard(final Board board) {
+    public Move firstMoveByBoard(final Board board) {
         Move move = this.createEntityObject();
         move.setBoard(board);
-        moveDao.persist(move);
+        return moveDao.persist(move);
     }
 
 

@@ -2,6 +2,7 @@ package com.gunes.controller;
 
 import com.gunes.enums.Status;
 import com.gunes.exceptions.BoardNotFoundException;
+import com.gunes.exceptions.BoardNotUpdateException;
 import com.gunes.model.entity.Board;
 import com.gunes.model.vo.BoardVO;
 import com.gunes.model.vo.mapper.BoardMapper;
@@ -43,7 +44,7 @@ public class BoardController {
         }
         if (!Status.isValidStatus(status) || board.getStatus() == Status.PASSIVE) {
             LOGGER.error("The 'status' parameter  not acceptable {}", status);
-            throw new IllegalArgumentException("The 'status' parameter  not acceptable ");
+            throw new BoardNotUpdateException("The 'status' parameter  not acceptable");
         }
         board.setStatus(Status.valueOf(status));
         board = boardService.update(board);

@@ -1,7 +1,7 @@
 package com.gunes.controller;
 
 import com.gunes.enums.Status;
-import com.gunes.exceptions.BoardNotActiveException;
+import com.gunes.exceptions.BoardNotUpdateException;
 import com.gunes.exceptions.BoardNotFoundException;
 import com.gunes.model.entity.Board;
 import com.gunes.model.entity.Move;
@@ -41,7 +41,7 @@ public class PlayController {
         }
         if (board.getStatus().equals(Status.PASSIVE)) {
             LOGGER.error("Board not active. Id:{}", boardId);
-            throw new BoardNotActiveException("Board not active. Id:{} " + boardId);
+            throw new BoardNotFoundException("Board not active. Id:{} " + boardId);
         }
         Move move = moveService.play(board, mapper.mapToEntity(moveVO));
         LOGGER.info("Added {} words", board.getId());

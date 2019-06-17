@@ -27,6 +27,8 @@ public class Board extends IdBaseEntity implements Serializable {
     public Board() {
     }
 
+
+
     public Board(final int horizontalSize, final int verticalSize) {
         this.horizontalSize = horizontalSize;
         this.verticalSize = verticalSize;
