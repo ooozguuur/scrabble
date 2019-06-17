@@ -43,7 +43,7 @@ public class PlayControllerTest {
 
 
     @Test
-    public void shouldAddWordWhenBoardNotFoundException() throws Exception {
+    public void test_play_board_not_found_exception() throws Exception {
         Mockito.when(boardService.findById(1L)).thenReturn(null);
         this.mockMvc.perform(post("/play/{boardId}", 1L).contentType(MediaType.APPLICATION_JSON)
                                      .content("{\n" +
@@ -59,7 +59,7 @@ public class PlayControllerTest {
     }
 
     @Test
-    public void shouldAddWordWhenBoardWhenNotAcceptable() throws Exception {
+    public void test_play_invalid_word_exception() throws Exception {
         Board board = new Board(15, 15);
         board.setId(1L);
         board.setStatus(Status.PASSIVE);
@@ -78,7 +78,7 @@ public class PlayControllerTest {
     }
 
     @Test
-    public void shouldAddWordWhenSuccess() throws Exception {
+    public void test_play_add_new_word_success() throws Exception {
         Board board = new Board(15, 15);
         board.setId(1L);
         board.setStatus(Status.ACTIVE);

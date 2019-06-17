@@ -47,7 +47,7 @@ public class WordControllerTest {
     }
 
     @Test
-    public void shouldGetWordsWhenWordIsEmpty() throws Exception {
+    public void test_get_words_by_board_is_empty() throws Exception {
         Board board = new Board(15, 15);
         board.setId(1L);
         board.setStatus(Status.ACTIVE);
@@ -59,13 +59,13 @@ public class WordControllerTest {
     }
 
     @Test
-    public void shouldGetWordsWhenBoardNotFoundException() throws Exception {
+    public void test_get_words_board_not_found_exception() throws Exception {
         Mockito.when(boardService.findById(1L)).thenReturn(null);
         this.mockMvc.perform(get("/word/get-words/{boardId}", 1L)).andExpect(status().is(404));
     }
 
     @Test
-    public void shouldGetWordsWhenSuccess() throws Exception {
+    public void test_get_words_result_success() throws Exception {
         Board board = new Board(15, 15);
         board.setId(1L);
         board.setStatus(Status.ACTIVE);

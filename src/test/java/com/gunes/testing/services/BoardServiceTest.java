@@ -32,7 +32,7 @@ public class BoardServiceTest {
 
 
     @Test
-    public void shouldCreateNewBoardWhenSuccess() {
+    public void test_create_board_success() {
         Board board = new Board(15, 15);
         Move move = new Move();
         move.setBoard(board);

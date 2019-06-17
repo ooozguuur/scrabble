@@ -47,7 +47,7 @@ public class MoveControllerTest {
     }
 
     @Test
-    public void shouldGetBoardContentWhenContentIsEmpty() throws Exception {
+    public void test_get_board_content_empty_result() throws Exception {
         Board board = new Board(15, 15);
         board.setId(1L);
         board.setStatus(Status.ACTIVE);
@@ -60,13 +60,13 @@ public class MoveControllerTest {
     }
 
     @Test
-    public void shouldGetBoardContentWhenBoardNotFoundException() throws Exception {
+    public void test_get_board_content_no_result_exception() throws Exception {
         Mockito.when(boardService.findById(1L)).thenReturn(null);
        this.mockMvc.perform(get("/move/get-board-content/{boardId}/{sequence}", 1L, 0L)).andExpect(status().is(404));
     }
 
     @Test
-    public void shouldGetBoardContentWhenFirstSequence() throws Exception {
+    public void test_get_board_content_return_second_sequence() throws Exception {
         Board board = new Board(15, 15);
         board.setId(1L);
         board.setStatus(Status.ACTIVE);

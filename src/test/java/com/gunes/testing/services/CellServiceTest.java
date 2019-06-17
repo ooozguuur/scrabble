@@ -28,7 +28,7 @@ public class CellServiceTest {
     private CellServiceImpl cellService;
 
     @Test
-    public void shouldSplitTheWordWhenSuccess() {
+    public void test_split_word_success_result() {
         Word word = new Word();
         word.setHorizontalStartingPoint(5);
         word.setHorizontalStartingPoint(4);
@@ -42,13 +42,13 @@ public class CellServiceTest {
     }
 
     @Test
-    public void shouldSplitTheWordWhenNullPointerException() {
+    public void test_split_word_null_pointer_exception() {
         Word word = new Word();
         Assertions.assertThrows(WordNotFoundException.class, () -> cellService.splitTheWord(word));
     }
 
     @Test
-    public void shouldCellToStringWhenReturnString() {
+    public void test_cell_to_string_success_string() {
         List<Cell> cells = new ArrayList<>();
         Cell cell1 = new Cell();
         cell1.setxPosition(5);
@@ -84,7 +84,7 @@ public class CellServiceTest {
     }
 
     @Test
-    public void shouldCellToStringWhenNullPointerException() {
+    public void test_cell_to_string_cell_is_null() {
         Assertions.assertThrows(NullPointerException.class, () -> cellService.cellToString(null));
     }
 

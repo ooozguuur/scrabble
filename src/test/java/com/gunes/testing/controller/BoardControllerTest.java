@@ -36,13 +36,13 @@ public class BoardControllerTest {
     }
 
     @Test
-    public void shouldCreateNewBoardWhenSuccess() throws Exception {
+    public void test_create_board_success() throws Exception {
         Mockito.when(boardService.createBoard()).thenReturn(new Board(15, 15));
         this.mockMvc.perform(post("/board/create")).andExpect(status().isOk());
     }
 
     @Test
-    public void shouldUpdateStatusBoardWhenSuccess() throws Exception {
+    public void test_update_board_status_success() throws Exception {
         Board board = new Board(15, 15);
         board.setId(1L);
         board.setStatus(Status.ACTIVE);
@@ -56,7 +56,7 @@ public class BoardControllerTest {
     }
 
     @Test
-    public void shouldUpdateStatusBoardWhenNotAcceptable() throws Exception {
+    public void test_update_status_not_acceptable_board() throws Exception {
         Board board = new Board(15, 15);
         board.setId(1L);
         board.setStatus(Status.PASSIVE);
@@ -65,7 +65,7 @@ public class BoardControllerTest {
     }
 
     @Test
-    public void shouldUpdateStatusBoardWhenBoardNotFoundException() throws Exception {
+    public void test_update_status_board_not_found_exception() throws Exception {
         Mockito.when(boardService.findById(1L)).thenReturn(null);
         this.mockMvc.perform(put("/board/update-status/{boardId}", 1L).param("status", Status.ACTIVE.toString())).andExpect(status().is(404));
     }
