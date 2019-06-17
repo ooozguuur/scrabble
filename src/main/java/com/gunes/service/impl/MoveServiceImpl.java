@@ -15,20 +15,20 @@ import java.util.List;
 @Service
 public class MoveServiceImpl extends GenericServiceImpl<Move, Long> implements MoveService {
 
-    @Autowired
-    private WordService wordService;
+    private final WordService wordService;
 
     private MoveDao moveDao;
 
     @Autowired
-    public MoveServiceImpl(final MoveDao moveDao) {
+    public MoveServiceImpl(final MoveDao moveDao, final WordService wordService) {
         super(moveDao);
         this.moveDao = moveDao;
+        this.wordService = wordService;
     }
 
     @Transactional(rollbackFor = Exception.class)
     public Move play(final Board board, final Move move) {
-        Integer sequence = this.getLastSequenceByBoardId(board.getId());
+        Integer sequence = moveDao.getLastSequenceByBoardId(board.getId());
         move.setSequence(++sequence);
         move.setBoard(board);
         move.getWords().stream().map(word -> wordService.createWordsByBoard(board, word)).forEach(move::setWords);
