@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,8 +25,8 @@ public class InsertDictionary {
         Long count = dictionaryWordService.count();
         if (count == 0) {
             InputStream in = this.getClass().getResourceAsStream("/dictionary/scrabble_turkish_dictionary.txt");
-            List<String> result = new BufferedReader(new InputStreamReader(in)).lines().parallel().collect(Collectors.toList());
-            result.parallelStream().forEach(r-> dictionaryWordService.persist(new DictionaryWord(r)));
+            List<String> result = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8)).lines().parallel().collect(Collectors.toList());
+            result.parallelStream().forEach(r -> dictionaryWordService.persist(new DictionaryWord(r)));
         }
     }
 }

@@ -24,4 +24,13 @@ public class MoveVO extends IdBaseVO {
     public void setWords(final List<WordVO> words) {
         this.words = words;
     }
+
+
+    @Override
+    public String toString() {
+        return "MoveVO{" +
+                "sequence=" + sequence +
+                ", words=" + words +
+                "} " + super.toString();
+    }
 }

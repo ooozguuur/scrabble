@@ -13,10 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.List;
@@ -25,7 +22,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping(value = "/move", consumes = "application/json", produces = "application/json")
+@RequestMapping(value = "/move", produces = "application/json")
 public class MoveController {
 
     private static final CellMapper mapper = Mappers.getMapper(CellMapper.class);
@@ -41,8 +38,8 @@ public class MoveController {
         this.moveService = moveService;
     }
 
-    @GetMapping("get-board-content/{boardId}/{sequence}")
-    public ResponseEntity<List<CellVO>> getBoardContent(@PathVariable Long boardId, @PathVariable Integer sequence) {
+    @GetMapping("/get-board-content/{boardId}/{sequence}")
+    public @ResponseBody ResponseEntity<List<CellVO>> getBoardContent(@PathVariable Long boardId, @PathVariable Integer sequence) {
         Board board = boardService.findById(boardId);
         if (board == null) {
             LOGGER.error("Board not found. {}", boardId);

@@ -35,7 +35,7 @@ public abstract class GenericServiceImpl<T, ID extends Serializable> implements 
 
     @Override
     public T findById(final long id) {
-        return findById(id);
+        return genericDao.findById(id);
     }
 }
 

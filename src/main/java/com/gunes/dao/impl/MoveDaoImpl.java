@@ -29,7 +29,7 @@ public class MoveDaoImpl extends GenericJpaDao<Move, Long> implements MoveDao {
 
     @Override
     public List<Move> getBoardContent(final Long boardId, final Integer sequence) {
-        String sql = " select mo from Move mo where mo.board.id = :boardId and mo.sequence <= :sequence ";
+        String sql = " select mo from Move mo join fetch mo.words wo join fetch wo.cells where mo.board.id = :boardId and mo.sequence <= :sequence ";
         return getEntityManager().createQuery(sql, Move.class)
                 .setParameter("boardId", boardId)
                 .setParameter("sequence", sequence)

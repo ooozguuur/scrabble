@@ -32,8 +32,8 @@ public class CellServiceImpl extends GenericServiceImpl<Cell, Long> implements C
     }
 
     @Override
-    public Set<Cell> splitTheWord(final Word word) {
-        Set<Cell> cells = new HashSet<>(word.getLetters().length());
+    public List<Cell> splitTheWord(final Word word) {
+        List<Cell> cells = new ArrayList<>(word.getLetters().length());
         char[] chars = word.getLetters().toCharArray();
         IntStream.range(0, chars.length).forEach(i -> {
             final char c = chars[i];

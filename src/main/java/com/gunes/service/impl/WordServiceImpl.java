@@ -74,7 +74,7 @@ public class WordServiceImpl extends GenericServiceImpl<Word, Long> implements W
 
     private List<Word> getAcceptableWords(Board board, Word word) {
         List<Cell> addedCharacters = cellService.getByBoardId(board.getId());
-        Set<Cell> newCharacters = cellService.splitTheWord(word);
+        List<Cell> newCharacters = cellService.splitTheWord(word);
         List<Word> words = new ArrayList<>();
         if (!addedCharacters.isEmpty()) {
             Cell[][] characters = listToArray(addedCharacters);
@@ -91,7 +91,8 @@ public class WordServiceImpl extends GenericServiceImpl<Word, Long> implements W
                 throw new NotAcceptableWordException("Acceptable Word not found");
             }
             newCharacters.forEach(cell -> cell.setBoard(board));
-            word.setCells(newCharacters);
+            Set<Cell> newCharactersSet = new HashSet<>(newCharacters);
+            word.setCells(newCharactersSet);
             words.add(word);
         }
         return words;
@@ -176,7 +177,7 @@ public class WordServiceImpl extends GenericServiceImpl<Word, Long> implements W
         return word;
     }
 
-    private void checkCellsInCharacter(final Set<Cell> letters, final Cell[][] cells) {
+    private void checkCellsInCharacter(final List<Cell> letters, final Cell[][] cells) {
         for (final Cell letter : letters) {
             if (cells[letter.getxPosition()][letter.getyPosition()] != null && cells[letter.getxPosition()][letter.getyPosition()].getCharacter() != letter.getCharacter()) {
                 LOGGER.error("Can not change cell in character.");

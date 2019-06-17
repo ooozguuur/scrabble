@@ -28,14 +28,14 @@ public class BoardController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Long> createBoard() {
+    public @ResponseBody ResponseEntity<Long> createBoard() {
         Board board = boardService.createBoard();
         LOGGER.info("Board created {}", board.getId());
         return ResponseEntity.ok().body(board.getId());
     }
 
     @PutMapping("/update-status/{boardId}")
-    public ResponseEntity<BoardVO> updateStatus(@PathVariable Long boardId, @RequestParam String status) {
+    public @ResponseBody ResponseEntity<BoardVO> updateStatus(@PathVariable Long boardId, @RequestParam String status) {
         Board board = boardService.findById(boardId);
         if (board == null) {
             LOGGER.error("Board not found. {}", boardId);

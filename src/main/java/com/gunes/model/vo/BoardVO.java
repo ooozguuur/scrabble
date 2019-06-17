@@ -34,4 +34,14 @@ public class BoardVO extends IdBaseVO {
     public void setVerticalSize(final int verticalSize) {
         this.verticalSize = verticalSize;
     }
+
+
+    @Override
+    public String toString() {
+        return "BoardVO{" +
+                "status=" + status +
+                ", horizontalSize=" + horizontalSize +
+                ", verticalSize=" + verticalSize +
+                "} " + super.toString();
+    }
 }

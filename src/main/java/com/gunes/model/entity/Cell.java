@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "CELL", indexes = {@Index(name = "CELL_BOARD_ID", columnList = "BOARD_ID")},
+@Table(name = "CELL", indexes = {@Index(name = "CELL_BOARD_INDEX", columnList = "BOARD_ID")},
        uniqueConstraints = {@UniqueConstraint(columnNames = {"X_POSITION", "Y_POSITION", "BOARD_ID"})})
 public class Cell extends IdBaseEntity {
 

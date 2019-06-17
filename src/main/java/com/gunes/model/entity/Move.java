@@ -14,7 +14,7 @@ public class Move extends IdBaseEntity {
     @Column(name = "SEQ")
     private int sequence;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "move", targetEntity = Word.class)
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = Word.class)
     private Set<Word> words = new HashSet<>();
 
     @ManyToOne

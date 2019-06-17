@@ -12,17 +12,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping(value = "/word", consumes = "application/json", produces = "application/json")
+@RequestMapping(value = "/word", produces = "application/json")
 public class WordController {
 
     private static final WordMapper mapper = Mappers.getMapper(WordMapper.class);
@@ -38,8 +35,8 @@ public class WordController {
         this.wordService = wordService;
     }
 
-    @GetMapping("get-words/{boardId}")
-    public ResponseEntity<List<WordVO>> getWords(@PathVariable Long boardId) {
+    @GetMapping("/get-words/{boardId}")
+    public @ResponseBody ResponseEntity<List<WordVO>> getWords(@PathVariable Long boardId) {
         Board board = boardService.findById(boardId);
         if (board == null) {
             throw new BoardNotFoundException("Board not found. Id:{} " + boardId);

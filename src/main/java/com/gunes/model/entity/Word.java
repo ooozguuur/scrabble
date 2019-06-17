@@ -5,7 +5,6 @@ import com.gunes.model.entity.base.IdBaseEntity;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -30,10 +29,6 @@ public class Word extends IdBaseEntity {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST}, targetEntity = Cell.class)
     private Set<Cell> cells = new HashSet<>();
-
-    @ManyToOne
-    @JoinColumn(name = "MOVE_ID", nullable = false)
-    private Move move;
 
     public String getLetters() {
         return letters;
@@ -84,14 +79,6 @@ public class Word extends IdBaseEntity {
         this.score = score;
     }
 
-    public Move getMove() {
-        return move;
-    }
-
-    public void setMove(final Move move) {
-        this.move = move;
-    }
-
     @Override
     public String toString() {
         return "Word{" +
@@ -104,20 +91,4 @@ public class Word extends IdBaseEntity {
                 "} ";
     }
 
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        final Word word = (Word) o;
-        return horizontalStartingPoint == word.horizontalStartingPoint &&
-                verticalStartingPoint == word.verticalStartingPoint &&
-                score == word.score &&
-                Objects.equals(letters, word.letters) &&
-                directionType == word.directionType &&
-                Objects.equals(move, word.move);
-    }
-
-    @Override public int hashCode() {
-        return Objects.hash(letters, horizontalStartingPoint, verticalStartingPoint, score, directionType, move);
-    }
 }

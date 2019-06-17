@@ -29,7 +29,7 @@ public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherSe
     private static void initializeAppEnvironment() {
         String env = System.getenv("env");
         if (env == null) {
-            System.setProperty("env", "dev");
+            System.setProperty("env", "prod");
         }
     }
 

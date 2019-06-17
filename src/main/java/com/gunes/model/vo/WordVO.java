@@ -54,4 +54,14 @@ public class WordVO extends IdBaseVO {
         this.directionType = directionType;
     }
 
+    @Override
+    public String toString() {
+        return "WordVO{" +
+                "letters='" + letters + '\'' +
+                ", horizontalStartingPoint=" + horizontalStartingPoint +
+                ", verticalStartingPoint=" + verticalStartingPoint +
+                ", score=" + score +
+                ", directionType=" + directionType +
+                "} " + super.toString();
+    }
 }

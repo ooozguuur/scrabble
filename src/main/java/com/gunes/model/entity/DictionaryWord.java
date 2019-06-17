@@ -2,12 +2,11 @@ package com.gunes.model.entity;
 
 import com.gunes.model.entity.base.IdBaseEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "DICTIONARY_WORD")
+@Table(name = "DICTIONARY_WORD", indexes = {@Index(name = "DIC_WORD_INDEX", columnList = "WORD")},
+       uniqueConstraints = {@UniqueConstraint(columnNames = {"WORD"})})
 public class DictionaryWord extends IdBaseEntity {
 
     @Column(name = "WORD", nullable = false)

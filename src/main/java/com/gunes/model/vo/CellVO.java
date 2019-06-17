@@ -31,4 +31,13 @@ public class CellVO extends IdBaseVO {
     public void setyPosition(final int yPosition) {
         this.yPosition = yPosition;
     }
+
+    @Override
+    public String toString() {
+        return "CellVO{" +
+                "character=" + character +
+                ", xPosition=" + xPosition +
+                ", yPosition=" + yPosition +
+                "} " + super.toString();
+    }
 }

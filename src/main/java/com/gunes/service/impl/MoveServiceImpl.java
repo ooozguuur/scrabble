@@ -27,12 +27,12 @@ public class MoveServiceImpl extends GenericServiceImpl<Move, Long> implements M
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void play(final Board board, final Move move) {
+    public Move play(final Board board, final Move move) {
         Integer sequence = this.getLastSequenceByBoardId(board.getId());
         move.setSequence(++sequence);
         move.setBoard(board);
         move.getWords().stream().map(word -> wordService.createWordsByBoard(board, word)).forEach(words -> move.getWords().addAll(words));
-        moveDao.persist(move);
+        return moveDao.persist(move);
     }
 
     private Integer getLastSequenceByBoardId(Long boardId) {

@@ -4,6 +4,7 @@ import com.gunes.enums.Status;
 import com.gunes.exceptions.BoardNotActiveException;
 import com.gunes.exceptions.BoardNotFoundException;
 import com.gunes.model.entity.Board;
+import com.gunes.model.entity.Move;
 import com.gunes.model.vo.MoveVO;
 import com.gunes.model.vo.mapper.MoveMapper;
 import com.gunes.service.BoardService;
@@ -32,7 +33,7 @@ public class PlayController {
     }
 
     @PostMapping("/{boardId}")
-    public ResponseEntity<MoveVO> play(@PathVariable Long boardId, @RequestBody MoveVO moveVO) {
+    public @ResponseBody ResponseEntity<MoveVO> play(@PathVariable Long boardId, @RequestBody MoveVO moveVO) {
         Board board = boardService.findById(boardId);
         if (board == null) {
             LOGGER.error("Board not found. {}", boardId);
@@ -42,8 +43,8 @@ public class PlayController {
             LOGGER.error("Board not active. Id:{}", boardId);
             throw new BoardNotActiveException("Board not active. Id:{} " + boardId);
         }
-        moveService.play(board, mapper.mapToEntity(moveVO));
+        Move move = moveService.play(board, mapper.mapToEntity(moveVO));
         LOGGER.info("Added {} words", board.getId());
-        return null;
+        return ResponseEntity.ok().body(mapper.mapToVO(move));
     }
 }

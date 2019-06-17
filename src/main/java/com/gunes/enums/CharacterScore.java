@@ -42,7 +42,7 @@ public enum CharacterScore {
 
     public static int getScore(final char character) {
         for (CharacterScore characterScore : CharacterScore.values()) {
-            if (characterScore.getCharacter() == character) {
+            if (characterScore.getCharacter() == Character.toUpperCase(character)) {
                 return characterScore.getScore();
             }
         }
@@ -53,15 +53,8 @@ public enum CharacterScore {
         return character;
     }
 
-    public void setCharacter(final char character) {
-        this.character = character;
-    }
-
     public int getScore() {
         return score;
     }
 
-    public void setScore(final int score) {
-        this.score = score;
-    }
 }
