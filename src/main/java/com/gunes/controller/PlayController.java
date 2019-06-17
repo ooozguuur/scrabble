@@ -1,7 +1,6 @@
 package com.gunes.controller;
 
 import com.gunes.enums.Status;
-import com.gunes.exceptions.BoardNotUpdateException;
 import com.gunes.exceptions.BoardNotFoundException;
 import com.gunes.model.entity.Board;
 import com.gunes.model.entity.Move;
