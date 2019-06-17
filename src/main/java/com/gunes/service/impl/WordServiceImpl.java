@@ -115,6 +115,7 @@ public class WordServiceImpl extends GenericServiceImpl<Word, Long> implements W
                         return true;
                     }
                     break;
+                default:
             }
 
         }

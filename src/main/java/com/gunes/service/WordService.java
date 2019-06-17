@@ -25,10 +25,7 @@ public interface WordService extends GenericService<Word, Long> {
             return false;
         }
 
-        if (word.getDirectionType() == DirectionType.VERTICAL && (word.getVerticalStartingPoint() + word.getLetters().length()) > verticalSize) {
-            return false;
-        }
-        return true;
+        return word.getDirectionType() != DirectionType.VERTICAL || (word.getVerticalStartingPoint() + word.getLetters().length()) <= verticalSize;
     }
 
     List<Word> getWords(Long boardId);
