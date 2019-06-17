@@ -31,7 +31,7 @@ public class MoveServiceImpl extends GenericServiceImpl<Move, Long> implements M
         Integer sequence = this.getLastSequenceByBoardId(board.getId());
         move.setSequence(++sequence);
         move.setBoard(board);
-        move.getWords().stream().map(word -> wordService.createWordsByBoard(board, word)).forEach(words -> move.getWords().addAll(words));
+        move.getWords().stream().map(word -> wordService.createWordsByBoard(board, word)).forEach(move::setWords);
         return moveDao.persist(move);
     }
 

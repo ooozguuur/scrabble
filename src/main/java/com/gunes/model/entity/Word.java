@@ -27,7 +27,11 @@ public class Word extends IdBaseEntity {
     @Column(name = "DIRECTION_TYPE", nullable = false)
     private DirectionType directionType;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST}, targetEntity = Cell.class)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST}, targetEntity = Cell.class)
+    @JoinTable(
+            name = "WORD_CELL",
+            joinColumns = @JoinColumn(name = "WORD_ID"),
+            inverseJoinColumns = @JoinColumn(name = "CELL_ID"))
     private Set<Cell> cells = new HashSet<>();
 
     public String getLetters() {

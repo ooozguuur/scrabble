@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping(value = "/board", consumes = "application/json", produces = "application/json")
+@RequestMapping(value = "/board", produces = "application/json")
 public class BoardController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BoardController.class);

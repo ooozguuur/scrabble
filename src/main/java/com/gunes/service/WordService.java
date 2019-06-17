@@ -6,10 +6,11 @@ import com.gunes.model.entity.Word;
 import com.gunes.service.base.GenericService;
 
 import java.util.List;
+import java.util.Set;
 
 public interface WordService extends GenericService<Word, Long> {
 
-    List<Word> createWordsByBoard(Board board, Word word);
+    Set<Word> createWordsByBoard(Board board, Word word);
 
     default boolean isAvailableCoordinates(int horizontalSize, int verticalSize, Word word) {
         if (word.getHorizontalStartingPoint() < 0 || word.getHorizontalStartingPoint() > horizontalSize) {

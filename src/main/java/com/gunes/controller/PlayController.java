@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/play", consumes = "application/json", produces = "application/json")
+@RequestMapping(value = "/play", produces = "application/json")
 public class PlayController {
 
     private static final MoveMapper mapper = Mappers.getMapper(MoveMapper.class);
