@@ -22,7 +22,7 @@ Eksik Noktalar:
     
    - Unit testler tamamlanmadı.
    - Integration testlere başlanılmadı.
-   - Sözlük datasını elasticsearch'e , dil destekli olarak yazmak istiyordum fakat başlayamadım.
+   - Sözlük datasını elasticsearch'e , dil destekli olarak çok daha hızlı yazmak istiyordum fakat başlayamadım.
    - Uygulama loglarını Logstash ile elasticsearch yazmak istiyordum fakat başlayamadım.
    
 
