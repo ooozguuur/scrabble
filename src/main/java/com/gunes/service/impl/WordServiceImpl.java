@@ -31,18 +31,19 @@ public class WordServiceImpl extends GenericServiceImpl<Word, Long> implements W
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WordServiceImpl.class);
 
-    @Autowired
-    private CellService cellService;
+    private final CellService cellService;
 
-    @Autowired
-    private DictionaryWordService dictionaryWordService;
+    private final DictionaryWordService dictionaryWordService;
 
     private WordDao wordDao;
 
     @Autowired
-    public WordServiceImpl(final WordDao wordDao) {
+    public WordServiceImpl(final WordDao wordDao, final CellService cellService,
+                           final DictionaryWordService dictionaryWordService) {
         super(wordDao);
         this.wordDao = wordDao;
+        this.cellService = cellService;
+        this.dictionaryWordService = dictionaryWordService;
     }
 
     @Override
