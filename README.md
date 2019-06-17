@@ -21,7 +21,7 @@ Swagger URL = http://${server_address}/scrabble/swagger-ui.html#
 Eksik Noktalar:
     
    - Unit testler tamamlanmadı.
-   - Integration testlere başlanılmadı.
+   - Integration testlere başlayamadım.
    - Sözlük datasını elasticsearch'e , dil destekli olarak çok daha hızlı yazmak istiyordum fakat başlayamadım.
    - Uygulama loglarını Logstash ile elasticsearch yazmak istiyordum fakat başlayamadım.
    
