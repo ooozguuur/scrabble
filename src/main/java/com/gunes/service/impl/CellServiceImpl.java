@@ -114,7 +114,7 @@ public class CellServiceImpl extends GenericServiceImpl<Cell> implements CellSer
     @Override
     public List<Cell> getLeftFillCells(final Cell cell, final Cell[][] characters) {
         List<Cell> cells = new ArrayList<>();
-        if (characters[cell.getxPosition()][cell.getyPosition()] != null) {
+        if (characters[cell.getxPosition() - 1][cell.getyPosition()] != null) {
             for (int i = cell.getxPosition() - 1; i >= 0; i--) {
                 if (characters[i][cell.getyPosition()] != null) {
                     cells.add(characters[i][cell.getyPosition()]);
