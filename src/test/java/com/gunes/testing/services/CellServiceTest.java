@@ -2,6 +2,7 @@ package com.gunes.testing.services;
 
 import com.gunes.dao.CellDao;
 import com.gunes.enums.DirectionType;
+import com.gunes.exceptions.CellCharacterNotUpdatedException;
 import com.gunes.exceptions.WordNotFoundException;
 import com.gunes.model.entity.Cell;
 import com.gunes.model.entity.Word;
@@ -266,5 +267,125 @@ public class CellServiceTest {
 
         List<Cell> cells = cellService.getRightFillCells(cell, characters);
         assertTrue(cells.isEmpty());
+    }
+
+    @Test
+    public void test_get_common_cells_success_return_result() {
+        List<Cell> cells = new ArrayList<>();
+        Cell cell1 = new Cell();
+        cell1.setxPosition(5);
+        cell1.setyPosition(4);
+        cell1.setCharacter('a');
+
+        Cell cell2 = new Cell();
+        cell2.setxPosition(5);
+        cell2.setyPosition(5);
+        cell2.setCharacter('r');
+
+        Cell cell3 = new Cell();
+        cell3.setxPosition(5);
+        cell3.setyPosition(6);
+        cell3.setCharacter('a');
+
+        Cell cell4 = new Cell();
+        cell4.setxPosition(5);
+        cell4.setyPosition(7);
+        cell4.setCharacter('b');
+
+        Cell cell5 = new Cell();
+        cell5.setxPosition(5);
+        cell5.setyPosition(8);
+        cell5.setCharacter('a');
+        cells.add(cell1);
+        cells.add(cell2);
+        cells.add(cell3);
+        cells.add(cell4);
+        cells.add(cell5);
+
+        Cell[][] characters = new Cell[15][15];
+        characters[5][4] = new Cell();
+        characters[5][4].setCharacter('a');
+        cells = cellService.getCommonCells(cells, characters);
+        assertEquals(cells.get(0).getCharacter(), 'a');
+    }
+
+
+    @Test
+    public void test_get_check_cells_in_character_by_board_cells_success_return_result() {
+        List<Cell> cells = new ArrayList<>();
+        Cell cell1 = new Cell();
+        cell1.setxPosition(5);
+        cell1.setyPosition(4);
+        cell1.setCharacter('a');
+
+        Cell cell2 = new Cell();
+        cell2.setxPosition(5);
+        cell2.setyPosition(5);
+        cell2.setCharacter('r');
+
+        Cell cell3 = new Cell();
+        cell3.setxPosition(5);
+        cell3.setyPosition(6);
+        cell3.setCharacter('a');
+
+        Cell cell4 = new Cell();
+        cell4.setxPosition(5);
+        cell4.setyPosition(7);
+        cell4.setCharacter('b');
+
+        Cell cell5 = new Cell();
+        cell5.setxPosition(5);
+        cell5.setyPosition(8);
+        cell5.setCharacter('a');
+        cells.add(cell1);
+        cells.add(cell2);
+        cells.add(cell3);
+        cells.add(cell4);
+        cells.add(cell5);
+
+        Cell[][] characters = new Cell[15][15];
+        characters[5][4] = new Cell();
+        characters[5][4].setCharacter('a');
+        cellService.checkCellsInCharacterByBoardInCells(cells, characters);
+    }
+
+    @Test
+    public void test_get_check_cells_in_character_by_board_cells_cell_not_updated_exception() {
+        List<Cell> cells = new ArrayList<>();
+        Cell cell1 = new Cell();
+        cell1.setxPosition(5);
+        cell1.setyPosition(4);
+        cell1.setCharacter('a');
+
+        Cell cell2 = new Cell();
+        cell2.setxPosition(5);
+        cell2.setyPosition(5);
+        cell2.setCharacter('r');
+
+        Cell cell3 = new Cell();
+        cell3.setxPosition(5);
+        cell3.setyPosition(6);
+        cell3.setCharacter('a');
+
+        Cell cell4 = new Cell();
+        cell4.setxPosition(5);
+        cell4.setyPosition(7);
+        cell4.setCharacter('b');
+
+        Cell cell5 = new Cell();
+        cell5.setxPosition(5);
+        cell5.setyPosition(8);
+        cell5.setCharacter('a');
+        cells.add(cell1);
+        cells.add(cell2);
+        cells.add(cell3);
+        cells.add(cell4);
+        cells.add(cell5);
+
+        Cell[][] characters = new Cell[15][15];
+        characters[5][4] = new Cell();
+        characters[5][4].setCharacter('n');
+        Assertions.assertThrows(CellCharacterNotUpdatedException.class, () -> cellService.checkCellsInCharacterByBoardInCells(cells, characters));
+
     }
 }

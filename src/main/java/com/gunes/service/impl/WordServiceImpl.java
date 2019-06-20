@@ -66,7 +66,7 @@ public class WordServiceImpl extends GenericServiceImpl<Word> implements WordSer
         Set<Word> newWords = new HashSet<>();
         if (!addedCharacters.isEmpty()) {
             Cell[][] characters = cellService.listToArray(addedCharacters);
-            cellService.checkCellsInCharacter(newCharacters, characters);
+            cellService.checkCellsInCharacterByBoardInCells(newCharacters, characters);
             Word word = this.initializeNewWord(newCharacters, characters, newWord.getDirectionType());
             newWords.add(word);
             newWords.addAll(this.getAdjacentWords(newCharacters, characters, newWord.getDirectionType()));

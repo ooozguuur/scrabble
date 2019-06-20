@@ -154,7 +154,7 @@ public class CellServiceImpl extends GenericServiceImpl<Cell> implements CellSer
     }
 
     @Override
-    public void checkCellsInCharacter(final List<Cell> newCharacters, final Cell[][] cells) {
+    public void checkCellsInCharacterByBoardInCells(final List<Cell> newCharacters, final Cell[][] cells) {
         for (final Cell letter : newCharacters) {
             if (cells[letter.getxPosition()][letter.getyPosition()] != null && cells[letter.getxPosition()][letter.getyPosition()].getCharacter() != letter.getCharacter()) {
                 LOGGER.error("Can not change cell in character.");

@@ -25,7 +25,7 @@ public interface CellService extends GenericService<Cell> {
 
     List<Cell> getRightFillCells(Cell cell, Cell[][] characters);
 
-    void checkCellsInCharacter(List<Cell> newCharacters, Cell[][] characters);
+    void checkCellsInCharacterByBoardInCells(List<Cell> newCharacters, Cell[][] characters);
 
     List<Cell> getCommonCells(List<Cell> newCharacters, Cell[][] characters);
 
