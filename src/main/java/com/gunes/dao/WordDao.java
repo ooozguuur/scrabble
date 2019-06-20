@@ -5,7 +5,7 @@ import com.gunes.model.entity.Word;
 
 import java.util.List;
 
-public interface WordDao extends GenericDao<Word, Long> {
+public interface WordDao extends GenericDao<Word> {
 
     List<Word> getWords(Long boardId);
 

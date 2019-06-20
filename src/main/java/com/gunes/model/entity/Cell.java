@@ -5,7 +5,6 @@ import com.gunes.model.entity.base.IdBaseEntity;
 import javax.persistence.*;
 import java.util.Objects;
 
-//TODO Unique Constraint must add {X_POSITION, Y_POSITION, BOARD_ID}
 @Entity
 @Table(name = "CELL", indexes = {@Index(name = "CELL_BOARD_INDEX", columnList = "BOARD_ID")})
 public class Cell extends IdBaseEntity {

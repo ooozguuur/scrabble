@@ -5,9 +5,7 @@ import com.gunes.model.entity.Cell;
 
 import java.util.List;
 
-public interface CellDao extends GenericDao<Cell, Long> {
+public interface CellDao extends GenericDao<Cell> {
 
-    Long countLetterByBoardId(final Long boardId);
-
-    List getByBoardId(Long boardId);
+    List<Cell> getByBoardId(Long boardId);
 }

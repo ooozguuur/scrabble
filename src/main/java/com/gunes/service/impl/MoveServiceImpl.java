@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class MoveServiceImpl extends GenericServiceImpl<Move, Long> implements MoveService {
+public class MoveServiceImpl extends GenericServiceImpl<Move> implements MoveService {
 
     private final WordService wordService;
 
@@ -33,10 +33,6 @@ public class MoveServiceImpl extends GenericServiceImpl<Move, Long> implements M
         move.setBoard(board);
         move.getWords().stream().map(word -> wordService.createWordsByBoard(board, word)).forEach(move::setWords);
         return moveDao.persist(move);
-    }
-
-    private Integer getLastSequenceByBoardId(Long boardId) {
-        return moveDao.getLastSequenceByBoardId(boardId);
     }
 
     @Override

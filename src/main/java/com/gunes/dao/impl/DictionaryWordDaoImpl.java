@@ -1,33 +1,44 @@
 package com.gunes.dao.impl;
 
 import com.gunes.dao.DictionaryWordDao;
-import com.gunes.dao.base.impl.GenericJpaDao;
-import com.gunes.model.entity.DictionaryWord;
+import com.gunes.enums.ApplicationConstants;
+import com.gunes.model.document.DictionaryWord;
+import org.mongodb.morphia.Datastore;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 @Repository
-public class DictionaryWordDaoImpl extends GenericJpaDao<DictionaryWord, Long> implements DictionaryWordDao {
+public class DictionaryWordDaoImpl implements DictionaryWordDao {
 
-    @Override
-    public DictionaryWord createEntityObject() {
-        return new DictionaryWord();
-    }
-
-    @Override
-    public Class getPersistentClass() {
-        return DictionaryWord.class;
-    }
+    @Autowired
+    protected Datastore datastore;
 
     @Override
     public Long count() {
-        String sql = "SELECT count(dw) from DictionaryWord dw";
-        return getEntityManager().createQuery(sql, Long.class).getSingleResult();
+        return datastore.getCollection(DictionaryWord.class).count();
     }
 
     @Override
     public boolean isAcceptableWord(final String letters) {
-        String sql = "select count(dw) > 0 from DictionaryWord dw where dw.word = :letters ";
-        return getEntityManager().createQuery(sql, Boolean.class).setParameter("letters", letters).getSingleResult();
+        return datastore
+                .find(DictionaryWord.class)
+                .field("translations").exists()
+                .filter("translations." + ApplicationConstants.DEFAULT_LANG, letters).count() > 0;
+
+    }
+
+    @Override
+    public List<DictionaryWord> saveAll(List<DictionaryWord> entity) {
+        datastore.save(entity);
+        return entity;
+    }
+
+    @Override
+    public DictionaryWord save(final DictionaryWord entity) {
+        datastore.save(entity);
+        return entity;
     }
 }

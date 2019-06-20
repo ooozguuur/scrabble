@@ -45,6 +45,9 @@ public class MoveController {
             throw new BoardNotFoundException("Board not found. Id:{} " + boardId);
         }
         List<Move> moves = moveService.getBoardContent(board, sequence);
+        if (moves.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
         Set<Cell> cells = new HashSet<>();
         moves.forEach(move -> move.getWords().forEach(word -> cells.addAll(word.getCells())));
         List<CellVO> cellVOS = cells.stream().map(mapper::mapToVO).collect(Collectors.toList());

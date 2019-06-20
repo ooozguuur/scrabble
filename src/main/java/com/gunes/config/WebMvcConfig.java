@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.*;
 @ComponentScan("com.gunes.controller")
 @EnableWebMvc
 @EnableAsync
-public class WebMvcConfig extends WebMvcConfigurerAdapter {
+public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {

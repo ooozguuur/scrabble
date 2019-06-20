@@ -6,7 +6,7 @@ import com.gunes.service.base.GenericService;
 
 import java.util.List;
 
-public interface MoveService extends GenericService<Move, Long> {
+public interface MoveService extends GenericService<Move> {
 
     Move play(Board board, Move move);
 

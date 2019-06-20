@@ -1,20 +1,20 @@
 package com.gunes.service.impl;
 
 import com.gunes.dao.DictionaryWordDao;
-import com.gunes.model.entity.DictionaryWord;
+import com.gunes.model.document.DictionaryWord;
 import com.gunes.service.DictionaryWordService;
-import com.gunes.service.base.impl.GenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class DictionaryWordServiceImpl extends GenericServiceImpl<DictionaryWord, Long> implements DictionaryWordService {
+public class DictionaryWordServiceImpl implements DictionaryWordService {
 
     private DictionaryWordDao dictionaryWordDao;
 
     @Autowired
     public DictionaryWordServiceImpl(final DictionaryWordDao dictionaryWordDao) {
-        super(dictionaryWordDao);
         this.dictionaryWordDao = dictionaryWordDao;
     }
 
@@ -28,5 +28,13 @@ public class DictionaryWordServiceImpl extends GenericServiceImpl<DictionaryWord
         return dictionaryWordDao.isAcceptableWord(letters.toLowerCase());
     }
 
+    @Override
+    public DictionaryWord save(final DictionaryWord dictionaryWord) {
+        return dictionaryWordDao.save(dictionaryWord);
+    }
 
+    @Override
+    public void saveAll(final List<DictionaryWord> dictionaryWords) {
+        dictionaryWordDao.saveAll(dictionaryWords);
+    }
 }

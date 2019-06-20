@@ -1,10 +1,6 @@
 package com.gunes.service.base;
 
-import java.io.Serializable;
-
-public interface GenericService<T, ID extends Serializable> {
-
-    Class<T> getPersistentClass();
+public interface GenericService<T> {
 
     T createEntityObject();
 

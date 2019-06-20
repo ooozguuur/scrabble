@@ -5,7 +5,7 @@ import com.gunes.model.entity.Move;
 
 import java.util.List;
 
-public interface MoveDao extends GenericDao<Move, Long> {
+public interface MoveDao extends GenericDao<Move> {
 
     Integer getLastSequenceByBoardId(Long boardId);
 

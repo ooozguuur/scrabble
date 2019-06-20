@@ -54,9 +54,9 @@ public class MoveControllerTest {
         Mockito.when(boardService.findById(1L)).thenReturn(board);
         Mockito.when(moveService.getBoardContent(board, 0)).thenReturn(new ArrayList<>());
         MvcResult mvcResult = this.mockMvc.perform(get("/move/get-board-content/{boardId}/{sequence}", 1L, 0L))
-                .andExpect(status().isOk())
+                .andExpect(status().isNoContent())
                 .andReturn();
-        assertEquals(mvcResult.getResponse().getContentAsString(), "[]");
+        assertEquals(mvcResult.getResponse().getContentAsString(), "");
     }
 
     @Test
@@ -75,7 +75,6 @@ public class MoveControllerTest {
         move.setSequence(0);
         move.setWords(new HashSet<>());
         move.setBoard(board);
-
         Move move1 = new Move();
         move1.setSequence(1);
         move1.setWords(new HashSet<>());

@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Repository
-public class CellDaoImpl extends GenericJpaDao<Cell, Long> implements CellDao {
+public class CellDaoImpl extends GenericJpaDao<Cell> implements CellDao {
 
     @Override
     public Cell createEntityObject() {
@@ -19,12 +19,6 @@ public class CellDaoImpl extends GenericJpaDao<Cell, Long> implements CellDao {
     @Override
     public Class getPersistentClass() {
         return Cell.class;
-    }
-
-    @Override
-    public Long countLetterByBoardId(final Long boardId) {
-        String sql = "SELECT COUNT(ce) from Cell ce where ce.board.id = :boardId";
-        return getEntityManager().createQuery(sql, Long.class).setParameter("boardId", boardId).getSingleResult();
     }
 
     @Override

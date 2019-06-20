@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public class BoardDaoImpl extends GenericJpaDao<Board, Long> implements BoardDao {
+public class BoardDaoImpl extends GenericJpaDao<Board> implements BoardDao {
 
     @Override
     public Board createEntityObject() {

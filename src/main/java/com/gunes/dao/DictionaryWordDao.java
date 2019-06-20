@@ -1,11 +1,16 @@
 package com.gunes.dao;
 
-import com.gunes.dao.base.GenericDao;
-import com.gunes.model.entity.DictionaryWord;
+import com.gunes.model.document.DictionaryWord;
 
-public interface DictionaryWordDao extends GenericDao<DictionaryWord, Long> {
+import java.util.List;
+
+public interface DictionaryWordDao {
 
     Long count();
 
     boolean isAcceptableWord(String letters);
+
+    List<DictionaryWord> saveAll(List<DictionaryWord> entity);
+
+    DictionaryWord save(DictionaryWord entity);
 }

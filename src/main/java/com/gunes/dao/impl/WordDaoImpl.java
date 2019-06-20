@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Repository
-public class WordDaoImpl extends GenericJpaDao<Word, Long> implements WordDao {
+public class WordDaoImpl extends GenericJpaDao<Word> implements WordDao {
 
     @Override
     public Word createEntityObject() {

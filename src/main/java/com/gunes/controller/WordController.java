@@ -41,6 +41,9 @@ public class WordController {
             throw new BoardNotFoundException("Board not found. Id:{} " + boardId);
         }
         List<Word> words = wordService.getWords(board.getId());
+        if (words.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
         LOGGER.info("The number of words on the board is {} .", words.size());
         List<WordVO> wordVOs = words.stream().map(mapper::mapToVO).collect(Collectors.toList());
         return ResponseEntity.ok().body(wordVOs);

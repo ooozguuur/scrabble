@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class BoardServiceImpl extends GenericServiceImpl<Board, Long> implements BoardService {
+public class BoardServiceImpl extends GenericServiceImpl<Board> implements BoardService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BoardServiceImpl.class);
 

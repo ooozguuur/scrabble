@@ -43,7 +43,7 @@ public class PlayController {
             throw new BoardNotFoundException("Board not active. Id:{} " + boardId);
         }
         Move move = moveService.play(board, mapper.mapToEntity(moveVO));
-        LOGGER.info("Added {} words", board.getId());
+        LOGGER.info("Board Id:{} added in words", board.getId());
         return ResponseEntity.ok().body(mapper.mapToVO(move));
     }
 }

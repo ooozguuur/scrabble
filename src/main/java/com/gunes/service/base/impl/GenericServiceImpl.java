@@ -3,19 +3,12 @@ package com.gunes.service.base.impl;
 import com.gunes.dao.base.GenericDao;
 import com.gunes.service.base.GenericService;
 
-import java.io.Serializable;
+public abstract class GenericServiceImpl<T> implements GenericService<T> {
 
-public abstract class GenericServiceImpl<T, ID extends Serializable> implements GenericService<T, ID> {
+    private GenericDao<T> genericDao;
 
-    private GenericDao<T, ID> genericDao;
-
-    public GenericServiceImpl(GenericDao<T, ID> genericDao) {
+    public GenericServiceImpl(GenericDao<T> genericDao) {
         this.genericDao = genericDao;
-    }
-
-    @Override
-    public Class<T> getPersistentClass() {
-        return this.genericDao.getPersistentClass();
     }
 
     @Override

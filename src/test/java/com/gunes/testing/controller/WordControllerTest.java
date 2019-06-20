@@ -53,9 +53,10 @@ public class WordControllerTest {
         board.setStatus(Status.ACTIVE);
         Mockito.when(boardService.findById(1L)).thenReturn(board);
         Mockito.when(wordService.getWords(1L)).thenReturn(new ArrayList<>());
-        MvcResult mvcResult = this.mockMvc.perform(get("/word/get-words/{boardId}", 1L)).andExpect(
-                status().isOk()).andReturn();
-        assertEquals(mvcResult.getResponse().getContentAsString(), "[]");
+        MvcResult mvcResult = this.mockMvc.perform(get("/word/get-words/{boardId}", 1L))
+                .andExpect(status().isNoContent())
+                .andReturn();
+        assertEquals(mvcResult.getResponse().getContentAsString(), "");
     }
 
     @Test

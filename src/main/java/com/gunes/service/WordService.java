@@ -8,7 +8,7 @@ import com.gunes.service.base.GenericService;
 import java.util.List;
 import java.util.Set;
 
-public interface WordService extends GenericService<Word, Long> {
+public interface WordService extends GenericService<Word> {
 
     Set<Word> createWordsByBoard(Board board, Word word);
 

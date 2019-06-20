@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Repository
-public class MoveDaoImpl extends GenericJpaDao<Move, Long> implements MoveDao {
+public class MoveDaoImpl extends GenericJpaDao<Move> implements MoveDao {
 
     @Override
     public Move createEntityObject() {

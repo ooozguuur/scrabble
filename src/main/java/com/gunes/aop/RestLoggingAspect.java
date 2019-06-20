@@ -31,7 +31,7 @@ public class RestLoggingAspect {
     @Around("loggingPoincut()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         LOGGER.info("Enter: {}.{}() with argument[s] = {}", joinPoint.getSignature().getDeclaringTypeName(),
-                     joinPoint.getSignature().getName(), Arrays.toString(joinPoint.getArgs()));
+                     joinPoint.getSignature().getName(), joinPoint.getArgs());
         try {
             Object result = joinPoint.proceed();
             LOGGER.info("Exit: {}.{}() with result = {}", joinPoint.getSignature().getDeclaringTypeName(),

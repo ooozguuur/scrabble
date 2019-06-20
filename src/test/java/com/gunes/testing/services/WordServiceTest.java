@@ -46,7 +46,6 @@ public class WordServiceTest {
         assertNull(words);
     }
 
-    @Test
     public void test_create_word_by_board_success_create_words() {
         Board board = new Board(15, 15);
         board.setId(1L);

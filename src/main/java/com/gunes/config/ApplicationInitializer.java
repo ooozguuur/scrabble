@@ -6,8 +6,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
-    protected Class<?>[] getRootConfigClasses() {
-        return new Class[] {JPAConfiguration.class, AspectConfig.class};
+    protected Class<?>[] getRootConfigClasses() { return new Class[] {JPAConfiguration.class, MongoDBConfiguration.class, AspectConfig.class};
     }
 
     @Override
@@ -29,7 +28,7 @@ public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherSe
     private static void initializeAppEnvironment() {
         String env = System.getenv("env");
         if (env == null) {
-            System.setProperty("env", "prod");
+            System.setProperty("env", "dev");
         }
     }
 

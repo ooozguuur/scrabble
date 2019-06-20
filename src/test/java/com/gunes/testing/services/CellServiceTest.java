@@ -79,13 +79,13 @@ public class CellServiceTest {
         cells.add(cell3);
         cells.add(cell4);
         cells.add(cell5);
-        String letters = cellService.cellToString(cells);
+        String letters = cellService.cellsToString(cells);
         assertEquals(letters, "araba");
     }
 
     @Test
-    public void test_cell_to_string_cell_is_null() {
-        Assertions.assertThrows(NullPointerException.class, () -> cellService.cellToString(null));
+    public void test_cell_to_string_cell_is_empty() {
+        assertEquals("", cellService.cellsToString(null));
     }
 
 }

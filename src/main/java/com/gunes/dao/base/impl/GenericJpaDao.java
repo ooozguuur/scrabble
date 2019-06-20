@@ -7,12 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 
 
 @Transactional
-public abstract class GenericJpaDao<T, ID extends Serializable> implements GenericDao<T, ID> {
+public abstract class GenericJpaDao<T> implements GenericDao<T> {
 
     private static final Logger LOGGER = LoggerFactory.logger(GenericJpaDao.class);
 

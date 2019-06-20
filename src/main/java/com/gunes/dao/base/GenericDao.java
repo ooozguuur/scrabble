@@ -1,8 +1,6 @@
 package com.gunes.dao.base;
 
-import java.io.Serializable;
-
-public interface GenericDao<T, ID extends Serializable> {
+public interface GenericDao<T> {
 
     Class<T> getPersistentClass();
 
